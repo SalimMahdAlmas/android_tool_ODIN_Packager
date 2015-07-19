@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2015 AndroidFire
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -21,22 +6,27 @@ import java.util.Scanner;
 
 class ODINPackager {
     public static void main(String args[]) {
-
+        // puts text into console
         System.out.print("ODIN Package Tool By AndroidFire \n");
+        // constructing scanner to get instance
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the file path you want to make odin flashable \n");
-
-
+        // puts text into console
+        System.out.println("Enter the file path you want to make odin flash-able \n");
+        // getting text from scanner
         String input = sc.next();
-
-
+        // it just show it does not did any work just for show up
         System.out.println("Processing the file ...");
+        System.out.println("It may take 10 second ...");
         System.out.println("...");
         System.out.println("......");
         System.out.println("............");
+        // constructing file
         File file = new File(input);
+        // closing scanner
         sc.close();
+        // check if file exist
         if (file.exists()) {
+            // did some work
             System.out.println("Congratulation the file exist\n");
             if (file.getName().toLowerCase().endsWith(".img")) {
                 System.out.println("Congratulation the file's extension is img");
