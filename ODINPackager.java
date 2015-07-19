@@ -11,59 +11,59 @@ class ODINPackager {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the file path you want to make odin flashable \n");
 
-        boolean loopComplete = false;
-                String input = sc.next();
+
+        String input = sc.next();
 
 
-                System.out.println("Processing the file ...");
-                System.out.println("...");
-                System.out.println("......");
-                System.out.println("............");
-                File file = new File(input);
-                sc.close();
-                if (file.exists()) {
-                    System.out.println("Congratulation the file exist\n");
-                    if (file.getName().toLowerCase().endsWith(".img")) {
-                        System.out.println("Congratulation the file's extension is img");
+        System.out.println("Processing the file ...");
+        System.out.println("...");
+        System.out.println("......");
+        System.out.println("............");
+        File file = new File(input);
+        sc.close();
+        if (file.exists()) {
+            System.out.println("Congratulation the file exist\n");
+            if (file.getName().toLowerCase().endsWith(".img")) {
+                System.out.println("Congratulation the file's extension is img");
 
-                        String without_ex = stripExtension(input);
-                        //tar -H ustar -c recovery.img > recovery.tar
-                        String aa = "tar -H ustar -c ";
-                        String bb = "md5sum -t ";
-                        String cc = "mv ";
-                        try {
+                String without_ex = stripExtension(input);
+                //tar -H ustar -c recovery.img > recovery.tar
+                String aa = "tar -H ustar -c ";
+                String bb = "md5sum -t ";
+                String cc = "mv ";
+                try {
 
-                         String aaa = aa + input + " > " + without_ex + ".tar";
+                    String aaa = aa + input + " > " + without_ex + ".tar";
 
-                      String bbb = bb + without_ex + ".tar" + " >> " + without_ex + ".tar";
-                            String ccc = cc + without_ex + ".tar" + " " + without_ex + ".tar.md5";
-                          commandIt(aaa);
-                            commandIt(bbb);
-                            commandIt(ccc);
-
-
-                            System.out.println("Operation Done");
-                        } catch (              //md5sum -t recovery.tar >> recovery.tar
-
-                                Exception e) {
-                            System.out.println("Could not make do the task error are below \n");
-                            e.printStackTrace();
+                    String bbb = bb + without_ex + ".tar" + " >> " + without_ex + ".tar";
+                    String ccc = cc + without_ex + ".tar" + " " + without_ex + ".tar.md5";
+                    commandIt(aaa);
+                    commandIt(bbb);
+                    commandIt(ccc);
 
 
-                        }
+                    System.out.println("Operation Done");
+                } catch (              //md5sum -t recovery.tar >> recovery.tar
 
+                        Exception e) {
+                    System.out.println("Could not make do the task error are below \n");
+                    e.printStackTrace();
 
-                    } else {
-                        System.out.println("Sorry your file's extension is not matched to img");
-                    }
-                } else if (!file.exists()) {
-
-                    System.out.println("Sorry file not exist\n");
-
-                    System.out.println("Please remove '' from start and ending if have \n ");
 
                 }
+
+
+            } else {
+                System.out.println("Sorry your file's extension is not matched to img");
             }
+        } else if (!file.exists()) {
+
+            System.out.println("Sorry file not exist\n");
+
+            System.out.println("Please remove '' from start and ending if have \n ");
+
+        }
+    }
     static void commandIt(String cmdline) {
         ArrayList<String> output = command(cmdline, ".");
         if (null == output)
@@ -73,19 +73,19 @@ class ODINPackager {
                 System.out.println(line);
 
     }
-    public static ArrayList<String> command(final String cmdline,
+     static ArrayList<String> command(final String cmdline,
                                             final String directory) {
         try {
             Process process =
-                    new ProcessBuilder(new String[] {"bash", "-c", cmdline})
+                    new ProcessBuilder("bash", "-c", cmdline)
                             .redirectErrorStream(true)
                             .directory(new File(directory))
                             .start();
 
-            ArrayList<String> output = new ArrayList<String>();
+            ArrayList<String> output = new ArrayList<>();
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
-            String line = null;
+            String line;
             while ( (line = br.readLine()) != null )
                 output.add(line);
 
